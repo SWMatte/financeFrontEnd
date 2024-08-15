@@ -1,3 +1,5 @@
+import { Type } from "./Type";
+
 export class EventRegistrationDTO{
 
     private _description!: string;
@@ -53,9 +55,6 @@ export class EventRegistrationDTO{
     }
 }
 
-enum Type {
-    SPESA,
-    ENTRATA
-  }
+
 
   
