@@ -42,7 +42,6 @@
         eventForm.get('savedMoney')?.value == 'true'
       "
     >
-      <!-- se risparmio true allora fai vedere  questa casella-->
       <mat-label>Percentuale di risparmio sull'evento</mat-label>
       <mat-select formControlName="percentageSaveMoney">
         <mat-option value="" disabled selected
@@ -54,8 +53,6 @@
       </mat-select>
     </mat-form-field>
 
-
-
     <mat-form-field
       appearance="fill"
       *ngIf="
@@ -66,8 +63,19 @@
       <mat-label>Vuoi mettere l'evento per il debito?</mat-label>
       <mat-select formControlName="objective">
         <mat-option value="true"> Si </mat-option>
-        <!-- apri un componente del debito per selezionarlo-->
         <mat-option value="false"> No </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="fill"
+      *ngIf="eventForm.get('objective')?.value == 'true'">
+      <mat-label>Seleziona debito da rateizzare</mat-label>
+      <mat-select formControlName="selectedDebt">
+        <mat-option value="" disabled selected>Seleziona debito</mat-option>
+        <mat-option *ngFor="let deb of debts" [value]="deb"
+          >{{ deb.description }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
