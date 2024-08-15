@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { firstValueFrom, Subscription } from 'rxjs';
+import { DebitPaymentDTO } from 'src/app/classes/DebitPaymentDTO';
 import { Type } from 'src/app/classes/Type';
-import { debit_event_subjects } from 'src/app/service/debit_event_subject'
+import { DebitService } from 'src/app/service/debit.service';
+
 
 @Component({
   selector: 'app-event',
@@ -14,10 +16,11 @@ export class EventComponent implements OnInit,OnDestroy  {
   typeEvent = Object.values(Type); // prendi i valori dell'enum 
   eventForm!: FormGroup
   percentage: number[] = [10,20,30,40,50,60,70,80,90,100]
+  debts: DebitPaymentDTO[] = [];  // Variabile per memorizzare i dati
 
   private dataSubjectSubscription!: Subscription;
 
-  constructor(private debitEventSubject: debit_event_subjects) { }  // dichiare il subject che mi collega evento e debito x mostrarlo nel html
+  constructor(private debitService :DebitService) { }
 
 
 
@@ -30,6 +33,8 @@ export class EventComponent implements OnInit,OnDestroy  {
       savedMoney : new FormControl(),
       objective : new FormControl(false),
       typeEvent : new FormControl(),
+      selectedDebt: new FormControl()  
+
  
     });
 
@@ -39,11 +44,8 @@ export class EventComponent implements OnInit,OnDestroy  {
       }
     });
 
-
-         // Sottoscrivi al Subject
-        this.dataSubjectSubscription = this.debitEventSubject.getDataSubject().subscribe(data => {
-          console.log('Received data:', data); // Sostituisci con la logica desiderata
-        });
+    this.getListDebtsDatabase();
+   
   }
 
   onSubmit() {
@@ -52,6 +54,9 @@ export class EventComponent implements OnInit,OnDestroy  {
     }
 
     console.log(this.eventForm.value);
+
+    const selectedDebtId = this.eventForm.get('selectedDebt')?.value;
+    console.log('ID del debito selezionato:', selectedDebtId);
   }
 
 
@@ -72,6 +77,21 @@ export class EventComponent implements OnInit,OnDestroy  {
       this.dataSubjectSubscription.unsubscribe();
     }
   }
- 
+  
+  
+  async getListDebtsDatabase(): Promise<void> {
+    try {
+      const response = await firstValueFrom(this.debitService.listDebts());
+      this.debts = response;  
+      
+      this.debts.forEach(element => {
+        new DebitPaymentDTO(element.debitID,element.data,element.description,element.valueStart,element.valueFinish,element.settled)
+       });
+       
+      console.log(response + " RESPONSE DATABASE");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   }

@@ -14,7 +14,7 @@ export class DebitService {
   url : string= 'http://localhost:8080/api/v1/';
 
   public listDebts():Observable<DebitPaymentDTO[]>{
-    let queryParams = new HttpParams();
+     
         return this.http.get<DebitPaymentDTO[]>(this.url+'getListDebts');
   }
 }
