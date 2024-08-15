@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Type } from 'src/app/classes/Type';
+import { debit_event_subjects } from 'src/app/service/debit_event_subject'
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.css']
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnInit,OnDestroy  {
 
   typeEvent = Object.values(Type); // prendi i valori dell'enum 
   eventForm!: FormGroup
   percentage: number[] = [10,20,30,40,50,60,70,80,90,100]
-  constructor() { }
+
+  private dataSubjectSubscription!: Subscription;
+
+  constructor(private debitEventSubject: debit_event_subjects) { }  // dichiare il subject che mi collega evento e debito x mostrarlo nel html
+
 
 
   ngOnInit(): void {
@@ -24,7 +30,7 @@ export class EventComponent implements OnInit {
       savedMoney : new FormControl(),
       objective : new FormControl(false),
       typeEvent : new FormControl(),
-
+ 
     });
 
     this.eventForm.get('typeEvent')?.valueChanges.subscribe(value => {
@@ -34,6 +40,10 @@ export class EventComponent implements OnInit {
     });
 
 
+         // Sottoscrivi al Subject
+        this.dataSubjectSubscription = this.debitEventSubject.getDataSubject().subscribe(data => {
+          console.log('Received data:', data); // Sostituisci con la logica desiderata
+        });
   }
 
   onSubmit() {
@@ -56,6 +66,12 @@ export class EventComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    // Cancella la sottoscrizione per evitare perdite di memoria
+    if (this.dataSubjectSubscription) {
+      this.dataSubjectSubscription.unsubscribe();
+    }
+  }
  
 
   }
