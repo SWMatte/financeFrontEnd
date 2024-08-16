@@ -17,4 +17,11 @@ export class DebitService {
      
         return this.http.get<DebitPaymentDTO[]>(this.url+'getListDebts');
   }
+
+
+  public reduceDebit(idDebit: number): Observable<void> {
+    const params = new HttpParams().set('idDebit', idDebit.toString());
+    return this.http.get<void>(this.url + 'reduceDebit',{ params });
+  }
+
 }

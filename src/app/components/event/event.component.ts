@@ -51,13 +51,26 @@ export class EventComponent implements OnInit,OnDestroy  {
   onSubmit() {
    if (this.eventForm.valid) {
     this.setFormDisabled(true);
-    }
 
-    console.log(this.eventForm.value);
-
-    const selectedDebtId = this.eventForm.get('selectedDebt')?.value;
-    console.log('ID del debito selezionato:', selectedDebtId);
+    // devi fare un controllo se io voglio risparmiare questo pezzo non lo eseguo se io voglio calare il debito eseguto questa parte,
+    // dato che è l'aggiungi evento che viene chiamato devi mettere anche un delay perche' nel caso prima mi crei l'evento che specifica che vuoi ridurre il devito e poi esegui questa parte che riduce il debito
+    // gestisci anche a backend la response entity di questa chiamata perche' se risponde con 200 allora ti sposti indietro o comq metti un pop up che mostra che l'inserimento è andato ok
+    const selectedDebt = this.eventForm.get('selectedDebt')?.value;
+     
+    this.debitService.reduceDebit(selectedDebt.debitID).subscribe({
+      next: (response) => {
+        console.log('Backend invocato con successo:', response); 
+      },
+      error: (error) => {
+        console.error('Errore durante la chiamata al backend:', error);  
+      }
+    });
   }
+
+
+ 
+ 
+   }
 
 
 
@@ -88,7 +101,6 @@ export class EventComponent implements OnInit,OnDestroy  {
         new DebitPaymentDTO(element.debitID,element.data,element.description,element.valueStart,element.valueFinish,element.settled)
        });
        
-      console.log(response + " RESPONSE DATABASE");
     } catch (error) {
       console.log(error);
     }
