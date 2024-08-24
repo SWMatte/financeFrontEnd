@@ -1,60 +1,57 @@
 import { Type } from "./Type";
 
-export class EventRegistrationDTO{
+export class EventRegistrationDTO {
 
-    private _description!: string;
+    private description!: string;
 
-    private _value!: String;
+    private value!: String;
 
-    private _percentageSaveMoney!: String;
+    private percentageSaveMoney!: String;
+
+    private savedMoney!: boolean;
+
+    private objective!: boolean;
+
+    private typeEvent!: Type;
    
-    private _savedMoney!: boolean;
+
+  public getDescription(): string {
+    return this.description;
+  }
+
+  public getValue(): String {
+    return this.value;
+  }
+
+  public getPercentageSaveMoney(): String {
+    return this.percentageSaveMoney;
+  }
+
+  public getSavedMoney(): boolean {
+    return this.savedMoney;
+  }
+
+  public getObjective(): boolean {
+    return this.objective;
+  }
+
+  public getTypeEvent(): Type {
+    return this.typeEvent;
+  }
+
  
-    private _objective!: boolean;
-    
-    private _typeEvent!: Type;
+
+    constructor(description: string,value: String, percentageSaveMoney:String,savedMoney: boolean,objective: boolean,  typeEvent: Type) {
+        this.description=description;
+        this.value=value;
+        this.percentageSaveMoney=percentageSaveMoney;
+        this.savedMoney=savedMoney;
+        this.objective=objective;
+        this.typeEvent=typeEvent;
+    }
 
 
-    public get savedMoney(): boolean {
-        return this._savedMoney;
-    }
-    public set savedMoney(value: boolean) {
-        this._savedMoney = value;
-    }
-    public get objective(): boolean {
-        return this._objective;
-    }
-    public set objective(value: boolean) {
-        this._objective = value;
-    }
-    public get typeEvent(): Type {
-        return this._typeEvent;
-    }
-    public set typeEvent(value: Type) {
-        this._typeEvent = value;
-    }
-
-    public get description(): string {
-        return this._description;
-    }
-    public set description(value: string) {
-        this._description = value;
-    }
-
-    public get value(): String {
-        return this._value;
-    }
-    public set value(value: String) {
-        this._value = value;
-    }
-    public get percentageSaveMoney(): String {
-        return this._percentageSaveMoney;
-    }
-    public set percentageSaveMoney(value: String) {
-        this._percentageSaveMoney = value;
-    }
 }
 
 
 
-  

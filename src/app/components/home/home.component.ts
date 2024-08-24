@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 /* QUESTA HOME DOVREI POPOLARLA CON QUALCOSA COME PAGINA DI ATTERRAGGIO*/
+
+  /**
+   * ! Important message
+   * * normal message
+   * ? questionable message
+   * TODO  things to do 
+   * @param debitService  
+   */
 }

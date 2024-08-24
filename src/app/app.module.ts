@@ -29,6 +29,7 @@ import { FormComponent } from './components/form/form.component';
 import { EventComponent } from './components/event/event.component';
 import { PercentagePipe } from './percentage.pipe';
 import { DebitComponent } from './components/debit/debit.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
