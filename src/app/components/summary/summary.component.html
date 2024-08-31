@@ -1,0 +1,64 @@
+<div *ngIf="!findError" class="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Summary ID Column -->
+    <ng-container matColumnDef="summaryId">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.summaryId}} </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef class="prova"> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <!-- Type Event Column -->
+    <ng-container matColumnDef="typeEvent">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.typeEvent}} </td>
+    </ng-container>
+
+    <!-- Value Column -->
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef> Value (€) </th>
+      <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+    </ng-container>
+
+    <!-- Euro Saved Column -->
+    <ng-container matColumnDef="euroSaved">
+      <th mat-header-cell *matHeaderCellDef> Euro Saved (€) </th>
+      <td mat-cell *matCellDef="let element"> {{element.euroSaved}} </td>
+    </ng-container>
+
+    <!-- Percentage Saved Column -->
+    <ng-container matColumnDef="percentageSaved">
+      <th mat-header-cell *matHeaderCellDef> Percentage Saved (%) </th>
+      <td mat-cell *matCellDef="let element"> {{element.percentageSaved}} </td>
+    </ng-container>
+
+    <!-- Debit Column -->
+    <ng-container matColumnDef="debit">
+      <th mat-header-cell *matHeaderCellDef> Debit </th>
+      <td mat-cell *matCellDef="let element"> {{element.debit}} </td>
+    </ng-container>
+
+    <!-- Data Column -->
+    <ng-container matColumnDef="data">
+      <th mat-header-cell *matHeaderCellDef> Data </th>
+      <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+    </ng-container>
+
+    <!-- Header and row definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Paginatore -->
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<!-- Error message -->
+<div *ngIf="findError" class="error-message">
+  {{ stringError }}
+</div>

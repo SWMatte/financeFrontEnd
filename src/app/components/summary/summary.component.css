@@ -1,0 +1,26 @@
+.table-container {
+  max-width: 57%; /* Limita la larghezza della tabella al 100% del contenitore */
+  margin: 0 auto;  /* Centra la tabella orizzontalmente */
+  padding: 10px;   /* Aggiungi un po' di padding attorno alla tabella */
+  border: 1px solid #ddd; /* Aggiunge un bordo attorno alla tabella */
+  border-radius: 8px; /* Aggiunge angoli arrotondati al bordo */
+  overflow: hidden; /* Assicura che il bordo arrotondato non venga tagliato */
+}
+
+table {
+  width: 100%; /* Assicura che la tabella utilizzi tutta la larghezza del contenitore */
+  border-collapse: collapse; /* Assicura che i bordi delle celle siano uniti */
+}
+
+  
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}
+/*  con questa maneira cambiamo il font e il css senno non se lo piglia */
+.prova {
+  color: rgb(21, 199, 101);  
+  background-color: #db1e1e !important;
+  font-weight: bold;
+}
