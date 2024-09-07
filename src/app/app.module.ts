@@ -29,6 +29,12 @@ import { FormComponent } from './components/form/form.component';
 import { EventComponent } from './components/event/event.component';
 import { PercentagePipe } from './percentage.pipe';
 import { DebitComponent } from './components/debit/debit.component';
+import { FinanceComponent } from './components/finance/finance.component';
+import { SummaryComponent } from './components/summary/summary.component';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CurrencyFormatPipe } from './currency-format.pipe';
+import { PercentageFormatPipe } from './percentage-format.pipe';
  
 @NgModule({
   declarations: [
@@ -39,7 +45,11 @@ import { DebitComponent } from './components/debit/debit.component';
     FormComponent,
     EventComponent,
     PercentagePipe,
-    DebitComponent
+    DebitComponent,
+    FinanceComponent,
+    SummaryComponent,
+    CurrencyFormatPipe,
+    PercentageFormatPipe
 
   ],
   imports: [
@@ -59,7 +69,9 @@ import { DebitComponent } from './components/debit/debit.component';
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: NativeDateAdapter, useClass: NativeDateAdapter },
