@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Summary } from '../classes/Summary';
@@ -15,11 +15,11 @@ export class GraphsService {
   url : string= 'http://localhost:8080/api/v1/';
  
       public getListDebts(): Observable<HttpResponse<Summary[]>> {
-       return this.http.get<Summary[]>(this.url + 'getList', { observe: 'response' });
+        const params = new HttpParams().set('month', "");
+       return this.http.get<Summary[]>(this.url + 'getList', {params, observe: 'response' });
     }
     
-
-
+ 
     public getFinance(): Observable<HttpResponse<Finance>> {
        return this.http.get<Finance>(this.url + 'getFinance', { observe: 'response' });
    }

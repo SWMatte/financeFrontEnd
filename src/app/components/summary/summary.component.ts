@@ -34,7 +34,7 @@ export class SummaryComponent implements OnInit {
          this.dataSource.data = this.summary;   // questi solo i valori effettivi della tabella 
 
         this.dataSource.paginator = this.paginator;  // questo permette di gestire la paginazione  e i valori derivano da :   <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> che situato nell html 
-
+          console.log(  this.dataSource.data)
          if (this.summary.length > 0) {  // qua prendiamo tutte le key dell'array quindi se aumentiano in maniera dinamica aumentano le colonne
           this.displayedColumns = this.orderValuesTable();
         }
@@ -65,7 +65,9 @@ export class SummaryComponent implements OnInit {
         return `€${value}`;
       case 'percentualeRisparmio':
         return `${value}%`;
-      case 'valore':
+      case 'valoreInserito':
+        return `€${value}`;
+      case 'euroDisponibili':
         return `€${value}`;
       default:
         return value;
@@ -80,10 +82,10 @@ export class SummaryComponent implements OnInit {
         tipoEvento: "",
         euroRisparmiati:  "",
         percentualeRisparmio: "",
-        valore: "",
+        valoreInserito: "",
         descrizione:"",
         data:"" ,
-        debito: ""
+        euroDisponibili: ""
       }
     ]; 
       return Object.keys(summary[0]);      
