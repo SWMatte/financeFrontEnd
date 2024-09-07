@@ -1,5 +1,5 @@
 .table-container {
-  max-width: 57%; /* Limita la larghezza della tabella al 100% del contenitore */
+  max-width: 80%; /* Limita la larghezza della tabella al 100% del contenitore */
   margin: 0 auto;  /* Centra la tabella orizzontalmente */
   padding: 10px;   /* Aggiungi un po' di padding attorno alla tabella */
   border: 1px solid #ddd; /* Aggiunge un bordo attorno alla tabella */

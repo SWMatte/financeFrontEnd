@@ -32,8 +32,10 @@ import { DebitComponent } from './components/debit/debit.component';
 import { FinanceComponent } from './components/finance/finance.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import {MatTableModule} from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator'; // Importa MatPaginatorModule
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CurrencyFormatPipe } from './currency-format.pipe';
+import { PercentageFormatPipe } from './percentage-format.pipe';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,9 @@ import { MatPaginatorModule } from '@angular/material/paginator'; // Importa Mat
     PercentagePipe,
     DebitComponent,
     FinanceComponent,
-    SummaryComponent
+    SummaryComponent,
+    CurrencyFormatPipe,
+    PercentageFormatPipe
 
   ],
   imports: [
