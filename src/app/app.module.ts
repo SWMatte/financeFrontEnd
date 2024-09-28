@@ -33,8 +33,9 @@ import { FinanceComponent } from './components/finance/finance.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
- 
+import { ABarComponent } from './components/a-bar/a-bar.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+   
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     PercentagePipe,
     DebitComponent,
     FinanceComponent,
-    SummaryComponent
+    SummaryComponent,
+    ABarComponent
 
   ],
   imports: [
@@ -68,7 +70,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSelectModule,
     MatSnackBarModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxChartsModule
   ],
   providers: [
     { provide: NativeDateAdapter, useClass: NativeDateAdapter },
