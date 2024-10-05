@@ -1,0 +1,17 @@
+.finance-button {
+  border-radius: 50px; /* Makes the button rounded */
+  padding: 20px 40px;  /* Adds padding for a larger button */
+  font-size: 18px;     /* Adjust the font size as needed */
+  background-color: #3f51b5; /* Customize the background color */
+  color: white;        /* Customize the text color */
+  text-align: center;
+}
+
+
+.error{
+  color: red;
+}
+
+.correct{
+  color: #ffff;
+}

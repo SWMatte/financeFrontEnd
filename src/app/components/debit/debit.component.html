@@ -1,19 +1,31 @@
-<p>debit works!</p>
+<app-navigation-menu></app-navigation-menu>
+
 <ng-container>
+   
+  <div class="form-container">
     <form [formGroup]="debitForm" (ngSubmit)="onSubmit()">
+      <p class="description-text">
+        Inserisci i dettagli del debito:
+      </p>
       <mat-form-field appearance="fill">
         <mat-label>Descrizione</mat-label>
         <input matInput type="text" formControlName="description" />
       </mat-form-field>
-  
+
       <mat-form-field appearance="fill">
         <mat-label>Valore debito accumulato</mat-label>
         <input matInput type="text" formControlName="valueStart" />
       </mat-form-field>
-  
-      <button type="submit" mat-raised-button [disabled]="!debitForm.valid">
-        Conferma
-      </button>
+
+      <button
+      class="full-width"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!debitForm.valid">
+      Conferma
+    </button>
+    
     </form>
-  </ng-container>
-  
+  </div>
+</ng-container>

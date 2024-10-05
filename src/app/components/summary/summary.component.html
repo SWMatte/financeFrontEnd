@@ -1,0 +1,45 @@
+
+<div *ngIf="!findError" class="table-container">
+  <mat-form-field > 
+    <mat-label class="custom-month-label">Scegli il mese da registrare</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      (dateChange)="dateSelected($event)"
+      [(ngModel)]="selectedDate"
+    />
+    <mat-hint>MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+ 
+  </mat-form-field>
+  <button mat-icon-button *ngIf="selectedDate" (click)="resetDate()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+    <!-- Dynamic column definitions -->
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
+      <td mat-cell *matCellDef="let element"> 
+        {{ formatCellValue(element[column], column) }}  <!-- qua andiamo a stampare quello che restituisce il metodo passando nella firma value + key-->
+      </td>
+    </ng-container>
+
+    <!-- Header and row definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <div>
+    <app-graph-component></app-graph-component>
+  </div>
+</div>
+
+<div *ngIf="findError" class="error-message">
+  {{ stringError }}
+</div>
+
+
+

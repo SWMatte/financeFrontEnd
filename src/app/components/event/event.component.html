@@ -1,78 +1,81 @@
 <ng-container>
-  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-      <mat-label>Descrizione</mat-label>
-      <input matInput type="text" formControlName="description" />
-    </mat-form-field>
+  
+  <div class="form-container">
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="form-content">
+      <p class="description-text">
+        Inserisci i dettagli dell'evento:
+      </p>
+      <!-- Descrizione -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descrizione</mat-label>
+        <input matInput type="text" formControlName="description" />
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Valore</mat-label>
-      <input matInput type="text" formControlName="value" />
-    </mat-form-field>
+      <!-- Valore -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Valore</mat-label>
+        <input matInput type="text" formControlName="value" />
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Tipologia evento</mat-label>
-      <mat-select formControlName="typeEvent">
-        <mat-option value="" disabled selected>Seleziona tipologia</mat-option>
-        <mat-option *ngFor="let type of typeEvent" [value]="type"
-          >{{ type }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- Tipologia evento -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Tipologia evento</mat-label>
+        <mat-select formControlName="typeEvent">
+          <mat-option value="" disabled selected>Seleziona tipologia</mat-option>
+          <mat-option *ngFor="let type of typeEvent" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field
-      appearance="fill"
-      *ngIf="eventForm.get('typeEvent')?.value != 'SPESA'"
-    >
-      <mat-label
-        >Vuoi risparmiare <br />
-        qualcosa <br />
-        su questo evento?</mat-label
+      <!-- Condizionale per risparmio -->
+      <mat-form-field appearance="fill" class="full-width" *ngIf="eventForm.get('typeEvent')?.value != 'SPESA'">
+        <mat-label>Vuoi risparmiare qualcosa su questo evento?</mat-label>
+        <mat-select formControlName="savedMoney">
+          <mat-option value="true">Si</mat-option>
+          <mat-option value="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Percentuale di risparmio -->
+      <mat-form-field
+        appearance="fill"
+        class="full-width"
+        *ngIf="eventForm.get('typeEvent')?.value == 'ENTRATA' && eventForm.get('savedMoney')?.value == 'true'"
       >
-      <mat-select formControlName="savedMoney">
-        <mat-option value="true"> Si </mat-option>
-        <mat-option value="false"> No </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-label>Percentuale di risparmio sull'evento</mat-label>
+        <mat-select formControlName="percentageSaveMoney">
+          <mat-option value="" disabled selected>Seleziona percentuale</mat-option>
+          <mat-option *ngFor="let perc of percentage" [value]="perc">{{ perc | percentage }}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field
-      appearance="fill"
-      *ngIf="
-        eventForm.get('typeEvent')?.value == 'ENTRATA' &&
-        eventForm.get('savedMoney')?.value == 'true'
-      "
-    >
-      <!-- se risparmio true allora fai vedere  questa casella-->
-      <mat-label>Percentuale di risparmio sull'evento</mat-label>
-      <mat-select formControlName="percentageSaveMoney">
-        <mat-option value="" disabled selected
-          >Seleziona percentuale</mat-option
-        >
-        <mat-option *ngFor="let perc of percentage" [value]="perc"
-          >{{ perc | percentage }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- Debito -->
+      <mat-form-field
+        appearance="fill"
+        class="full-width"
+        *ngIf="eventForm.get('typeEvent')?.value == 'ENTRATA' && eventForm.get('savedMoney')?.value == 'false'"
+      >
+        <mat-label>Vuoi mettere l'evento per il debito?</mat-label>
+        <mat-select formControlName="objective">
+          <mat-option value="true">Si</mat-option>
+          <mat-option value="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-
-
-    <mat-form-field
-      appearance="fill"
-      *ngIf="
-        eventForm.get('typeEvent')?.value == 'ENTRATA' &&
-        eventForm.get('savedMoney')?.value == 'false'
-      "
-    >
-      <mat-label>Vuoi mettere l'evento per il debito?</mat-label>
-      <mat-select formControlName="objective">
-        <mat-option value="true"> Si </mat-option>
-        <!-- apri un componente del debito per selezionarlo-->
-        <mat-option value="false"> No </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <button type="submit" mat-raised-button [disabled]="!eventForm.valid">
-      Conferma
-    </button>
-  </form>
+      <!-- Seleziona debito -->
+      <mat-form-field appearance="fill" class="full-width" *ngIf="eventForm.get('objective')?.value == 'true'">
+        <mat-label>Seleziona debito da rateizzare</mat-label>
+        <mat-select formControlName="selectedDebt">
+          <mat-option value="" disabled selected>Seleziona debito</mat-option>
+          <mat-option *ngFor="let deb of debts" [value]="deb">
+            {{ deb.description }}({{ deb.valueFinish | currency: 'EUR' }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      
+        <button type="submit" mat-raised-button color="primary" [disabled]="!eventForm.valid"  class="full-width">Conferma</button>
+       
+      
+    </form>
+  </div>
 </ng-container>
