@@ -57,22 +57,15 @@ export class SummaryComponent implements OnInit, OnChanges{
          * Richiamiamo il behavior subject DataServiceBehaviorSubj  per assegnargli l'array
          */
         if (this.summary.length > 0) {
-          if (SummaryDTO.graphArray.length > 0) { // l'array contiene gia dei valori? allora lo svuoto per far si che non si vadano a sommare per il grafico
-            SummaryDTO.graphArray = []
-            this.summary.forEach(value => SummaryDTO.toGraph(value.tipoEvento?.toString(), value.valoreInserito)) // popolo nuovamente quell'array
+          if (SummaryDTO.graphArray.length == 0) {  
+            this.summary.forEach(value => SummaryDTO.toGraph(value.tipoEvento?.toString(), value.valoreInserito))  
             this.dataServiceBehaviorSubj.setGraphArray(SummaryDTO.graphArray)
-          } else { // nel caso l'array fosse gia vuoto lo popolo
+          } else { 
+            SummaryDTO.graphArray=[]
             this.summary.forEach(value => SummaryDTO.toGraph(value.tipoEvento?.toString(), value.valoreInserito))
             this.dataServiceBehaviorSubj.setGraphArray(SummaryDTO.graphArray)
           }
-         } else {
-          this.dataServiceBehaviorSubj.setGraphArray([])
-          SummaryDTO.graphArray = [];
-         }
-
-
-        
-
+        }
         this.findError = false;
       } else {
         this.findError = true;
@@ -134,6 +127,13 @@ async dateSelected(event: MatDatepickerInputEvent<Date>) {
     // Richiama summaryResult() per ottenere i dati aggiornati
     await this.summaryResult();
   }
+}
+
+async  resetDate(){
+  this.month="";
+  this.selectedDate=null;
+  
+  await this.summaryResult();
 }
 
 }

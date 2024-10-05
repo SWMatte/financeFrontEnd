@@ -6,11 +6,16 @@
       matInput
       [matDatepicker]="picker"
       (dateChange)="dateSelected($event)"
+      [(ngModel)]="selectedDate"
     />
     <mat-hint>MM/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+ 
   </mat-form-field>
+  <button mat-icon-button *ngIf="selectedDate" (click)="resetDate()">
+    <mat-icon>close</mat-icon>
+  </button>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     
     <!-- Dynamic column definitions -->
@@ -27,8 +32,14 @@
   </table>
 
   <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <div>
+    <app-graph-component></app-graph-component>
+  </div>
 </div>
 
 <div *ngIf="findError" class="error-message">
   {{ stringError }}
 </div>
+
+
+

@@ -1,46 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { SummaryDTO } from 'src/app/classes/SummaryDTO';
 import { DataServiceBehaviorSubj } from 'src/app/service/dataServiceBehaviorSubj';
- import { GraphsService } from 'src/app/service/graphs.service';
+import { GraphsService } from 'src/app/service/graphs.service';
 
 @Component({
   selector: 'app-graph-component',
   templateUrl: './graph-component.component.html',
   styleUrls: ['./graph-component.component.css']
 })
-export class GraphComponentComponent   implements OnInit{
-  eventsRecorded: any[] = []; // Sorgente dei dati per il grafico
-  hasValidData: boolean = false; // Booleano per controllare la presenza di dati validi
-  dataGraph$!: Subscription; // subscription per gestire l'ascolto
-  
-  constructor(
-    private graphService: GraphsService,
-    private dataServiceBehaviorSubj: DataServiceBehaviorSubj 
-  ) {}
-    ngOnInit(): void {
-  //   this.dataGraph$.subscribe((data) => {
-  //     if (data.length > 0) {
-  //       this.eventsRecorded = SummaryDTO.sourceData(data);
-  //       console.log("Events Recorded:", this.eventsRecorded);
+export class GraphComponentComponent implements OnInit {
+  summaryDTO: SummaryDTO = new SummaryDTO();  // per elaborare i dati del grafico
+  eventsRecorded!: any[];  // dati sorgente per il grafico
+  dataGraph!: SummaryDTO[];  // array di dati ottenuti dal BehaviorSubject
+  dataGraph$!: Observable<SummaryDTO[]>;  // Observable del BehaviorSubject
+  private subscription!: Subscription;  // Subscription per gestire l'iscrizione
 
-  //       // Controlla che ci siano valori validi
-  //       this.hasValidData = this.eventsRecorded.some(record => (record.value ?? 0) > 0);
+  constructor(private dataServiceBehaviorSubj: DataServiceBehaviorSubj, private cd: ChangeDetectorRef) {
+    this.dataGraph$ = this.dataServiceBehaviorSubj.getValue();  // Prendi l'Observable dal servizio
+  }
 
-  //       if (!this.hasValidData) {
-  //         console.warn("No valid data to display");
-  //       }
-  //     } else {
-  //       this.hasValidData = false; // Se non ci sono dati
-  //       console.warn("No data available");
-  //     }
-  //   });
-    }
+  ngOnInit(): void {
+    // Iscrizione all'Observable
+    this.subscription = this.dataGraph$.subscribe((data) => {
+      if (data.length > 0) {
+        this.eventsRecorded = SummaryDTO.sourceData(data);
+      }
+    });
+}
 
   ngOnDestroy(): void {
-    // Ricordati di disiscriverti per evitare memory leak
-    if (this.dataGraph$) {
-      this.dataGraph$.unsubscribe();
+    // Disiscrivi per evitare memory leaks
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
@@ -72,7 +64,7 @@ export class GraphComponentComponent   implements OnInit{
   trimYAxisTicks: boolean = false;
   rotateXAxisTicks: boolean = false;
 
-  yAxisTicks: any[] = [50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000]  // scala sull'asse Y
+  yAxisTicks: any[] = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000]  // scala sull'asse Y
 
   animations: boolean = true; // animations on load
 
@@ -93,5 +85,5 @@ export class GraphComponentComponent   implements OnInit{
 
   yScaleMax: number = 9000;
 
-  roundEdges: boolean = true; 
+  roundEdges: boolean = true;
 }

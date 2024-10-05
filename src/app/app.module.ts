@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
 
 
 
@@ -73,7 +74,8 @@ import { GraphComponentComponent } from './components/graph-component/graph-comp
     MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
-    NgxChartsModule
+    NgxChartsModule,
+    FormsModule
   ],
   providers: [
     { provide: NativeDateAdapter, useClass: NativeDateAdapter },

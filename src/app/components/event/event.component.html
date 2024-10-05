@@ -2,6 +2,9 @@
   
   <div class="form-container">
     <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="form-content">
+      <p class="description-text">
+        Inserisci i dettagli dell'evento:
+      </p>
       <!-- Descrizione -->
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Descrizione</mat-label>
@@ -68,11 +71,11 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
-      <!-- Pulsante di submit -->
-      <div class="full-width">
-        <button type="submit" mat-raised-button color="primary" [disabled]="!eventForm.valid">Conferma</button>
-      </div>
+  
+      
+        <button type="submit" mat-raised-button color="primary" [disabled]="!eventForm.valid"  class="full-width">Conferma</button>
+       
+      
     </form>
   </div>
 </ng-container>

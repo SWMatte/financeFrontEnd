@@ -1,8 +1,12 @@
 <app-navigation-menu></app-navigation-menu>
 
 <ng-container>
+   
   <div class="form-container">
     <form [formGroup]="debitForm" (ngSubmit)="onSubmit()">
+      <p class="description-text">
+        Inserisci i dettagli del debito:
+      </p>
       <mat-form-field appearance="fill">
         <mat-label>Descrizione</mat-label>
         <input matInput type="text" formControlName="description" />

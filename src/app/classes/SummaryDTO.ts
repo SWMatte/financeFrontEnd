@@ -20,22 +20,24 @@ export class SummaryDTO {
         let entrataTotale: number = 0;
         let spesaTotale: number = 0;
         let debitoTotale: number = 0;
+        let array:any = [];
 
         for (let element of dataGraph) {
-            if (element.tipoEvento === 'ENTRATA') {
-                entrataTotale += element.valoreInserito ?? 0;  // Usa 0 se valoreInserito è undefined
-            } else if (element.tipoEvento === 'SPESA') {
+            if (element.tipoEvento == 'ENTRATA') {
+                entrataTotale += element.valoreInserito ?? 0; 
+                array.push({"name":element.tipoEvento,"value":entrataTotale})
+            } else if (element.tipoEvento =='SPESA') {
                 spesaTotale += element.valoreInserito ?? 0;
-            } else if (element.tipoEvento === 'DEBITO') {
+                array.push({"name":element.tipoEvento,"value":spesaTotale})
+
+            } else if (element.tipoEvento == 'DEBITO') {
                 debitoTotale += element.valoreInserito ?? 0;
+                array.push({"name":element.tipoEvento,"value":debitoTotale})
+
             }
         }
 
-        let array = [
-            { "name": 'ENTRATA', "value": entrataTotale ?? 0 },
-            { "name": 'SPESA', "value": spesaTotale ?? 0 },
-            { "name": 'DEBITO', "value": debitoTotale ?? 0 }
-        ];
+      
 
         return array;
     }
