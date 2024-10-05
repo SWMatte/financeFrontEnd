@@ -2,26 +2,25 @@ import { Type } from './Type';
 export class Summary {
 
 
-   summaryId?: number;
-   description?: string;
+   registroEventiId?: number;
+   descrizione?: string;
    data?: Date;
-   typeEvent?: Type; // Usa `?` per indicare che può essere `undefined`
-   value?: number;
-   euroSaved?: number;
-   percentageSaved?: number;
-   debit?:string;
+   tipoEvento?: Type; // Usa `?` per indicare che può essere `undefined`
+   valoreInserito?: number;
+   euroRisparmiati?: number;
+   euroDisponibili?:string
+   percentualeRisparmio?: number;
 
- 
 
-   constructor(summaryId: number,description: string, data:Date,typeEvent: Type,  value: number, euroSaved: number, percentageSaved:number, debit:string) {
-    this.summaryId=summaryId;
-    this.description=description;
-    this.data=data;
-    this.typeEvent=typeEvent;
-    this.value=value;
-    this.euroSaved=euroSaved;
-    this.percentageSaved=percentageSaved;
-    this.debit=debit;
- }
+  constructor(summaryId: number,description: string, data:Date,typeEvent: Type,  value: number, euroSaved: number,euroAvailable:string,percentageSaved:number ) {
+   this.registroEventiId=summaryId;
+   this.descrizione=description;
+   this.data=data;
+    this.tipoEvento=typeEvent;
+    this.valoreInserito=value;
+    this.euroRisparmiati=euroSaved;
+    this.euroDisponibili= euroAvailable;
+    this.percentualeRisparmio=percentageSaved;
+  }
 
 }

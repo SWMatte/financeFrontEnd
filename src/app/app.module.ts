@@ -35,6 +35,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ABarComponent } from './components/a-bar/a-bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GraphComponentComponent } from './components/graph-component/graph-component.component';
    
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     DebitComponent,
     FinanceComponent,
     SummaryComponent,
-    ABarComponent
+    ABarComponent,
+    GraphComponentComponent
 
   ],
   imports: [
