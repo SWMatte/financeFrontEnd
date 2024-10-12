@@ -24,5 +24,8 @@ export class GraphsService {
     public getFinance(): Observable<HttpResponse<Finance>> {
        return this.http.get<Finance>(this.url + 'getFinance', { observe: 'response' });
    }
+
+
+   
    
 }
