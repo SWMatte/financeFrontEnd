@@ -15,3 +15,10 @@
 .correct{
   color: #ffff;
 }
+
+.container {
+  display: flex;                     /* Use flexbox to center the content */
+  justify-content: center;           /* Center horizontally */
+  align-items: center;               /* Center vertically */
+  height: 5rem;                    /* Full height of the viewport */
+}

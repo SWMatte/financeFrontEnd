@@ -2,8 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { SummaryDTO } from 'src/app/classes/SummaryDTO';
 import { DataServiceBehaviorSubj } from 'src/app/service/dataServiceBehaviorSubj';
-import { GraphsService } from 'src/app/service/graphs.service';
-
+ 
 @Component({
   selector: 'app-graph-component',
   templateUrl: './graph-component.component.html',
@@ -45,7 +44,7 @@ export class GraphComponentComponent implements OnInit {
   // opzioni per la legenda
   legendTitle: string = 'titoloLegenda';
   legendTitleMulti: string = 'Month';
-  legendPosition: any = 'below'; // ['right', 'below']
+  legendPosition: any = 'right'; // ['right', 'below']
   legend: boolean = true;
 
   // didascalie per i campi
@@ -53,8 +52,8 @@ export class GraphComponentComponent implements OnInit {
   yAxis: boolean = true; // mostri etichette asse Y 
 
 
-  yAxisLabel: string = 'descAsseY'; // valorizzi etichetta esterna asse Y
-  xAxisLabel: string = 'descAsseX'; // valorizzi etichetta esterna asse X
+  yAxisLabel: string = '€ EURO'; // valorizzi etichetta esterna asse Y
+  xAxisLabel: string = 'Tipologie'; // valorizzi etichetta esterna asse X
   showXAxisLabel: boolean = true; // mostri o no etichette
   showYAxisLabel: boolean = true;
 
@@ -64,7 +63,7 @@ export class GraphComponentComponent implements OnInit {
   trimYAxisTicks: boolean = false;
   rotateXAxisTicks: boolean = false;
 
-  yAxisTicks: any[] = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000]  // scala sull'asse Y
+  yAxisTicks: any[] = [50, 250,  450,  700,  950]  // scala sull'asse Y
 
   animations: boolean = true; // animations on load
 

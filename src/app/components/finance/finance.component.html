@@ -1,9 +1,10 @@
-<!-- Visualizzazione delle finanze se non ci sono errori -->
-<div *ngIf="!findError" class="finance-button correct">
-  Finanza disponibile : {{finance?.actualFinance | currency: 'EUR'}}  
-</div>
-
-<!-- Visualizzazione del messaggio di errore se c'è un errore -->
-<div *ngIf="findError" class="finance-button error">
-  {{stringError}}
+<div class="container">
+  <!-- Visualizzazione delle finanze se non ci sono errori -->
+  <div *ngIf="!findError" class="finance-button correct">
+      Finanza disponibile : {{finance?.actualFinance | currency: 'EUR'}}
+  </div>
+  <!-- Visualizzazione del messaggio di errore se c'è un errore -->
+  <div *ngIf="findError" class="finance-button error">
+      {{stringError}}
+  </div>
 </div>

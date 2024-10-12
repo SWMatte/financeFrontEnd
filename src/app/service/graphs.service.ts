@@ -15,7 +15,7 @@ export class GraphsService {
   url : string= 'http://localhost:8080/api/v1/';
  
       public getListEvent(month:string): Observable<HttpResponse<Summary[]>> {
-        console.log(month)
+       
         const params = new HttpParams().set('month', month);
        return this.http.get<Summary[]>(this.url + 'getList', {params, observe: 'response' });
     }

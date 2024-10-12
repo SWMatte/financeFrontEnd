@@ -20,25 +20,30 @@ export class SummaryDTO {
         let entrataTotale: number = 0;
         let spesaTotale: number = 0;
         let debitoTotale: number = 0;
-        let array:any = [];
-
+    
+        // Itera sull'array di dati e accumula i valori
         for (let element of dataGraph) {
             if (element.tipoEvento == 'ENTRATA') {
                 entrataTotale += element.valoreInserito ?? 0; 
-                array.push({"name":element.tipoEvento,"value":entrataTotale})
-            } else if (element.tipoEvento =='SPESA') {
+            } else if (element.tipoEvento == 'SPESA') {
                 spesaTotale += element.valoreInserito ?? 0;
-                array.push({"name":element.tipoEvento,"value":spesaTotale})
-
             } else if (element.tipoEvento == 'DEBITO') {
                 debitoTotale += element.valoreInserito ?? 0;
-                array.push({"name":element.tipoEvento,"value":debitoTotale})
-
             }
         }
-
-      
-
+    
+        let array: any[] = [];
+    
+        if (entrataTotale > 0) {
+            array.push({ "name": 'ENTRATA', "value": entrataTotale });
+        }
+        if (spesaTotale > 0) {
+            array.push({ "name": 'SPESA', "value": spesaTotale });
+        }
+        if (debitoTotale > 0) {
+            array.push({ "name": 'DEBITO', "value": debitoTotale  });
+        }
+    
         return array;
     }
 
