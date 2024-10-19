@@ -1,20 +1,19 @@
 
 <div *ngIf="!findError" class="table-container">
   <mat-form-field > 
-    <mat-label class="custom-month-label">Scegli il mese da registrare</mat-label>
+    <mat-label class="custom-month-label">Scegli il mese da visualizzare</mat-label>
     <input
       matInput
       [matDatepicker]="picker"
+      (focus)="picker.open()"
       (dateChange)="dateSelected($event)"
       [(ngModel)]="selectedDate"
     />
-    <mat-hint>MM/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+     <mat-datepicker #picker></mat-datepicker>
  
   </mat-form-field>
   <button mat-icon-button *ngIf="selectedDate" (click)="resetDate()">
-    <mat-icon>close</mat-icon>
+  <mat-icon>delete</mat-icon>
   </button>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     

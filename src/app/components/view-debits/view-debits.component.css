@@ -1,0 +1,56 @@
+/* Centra tutto il contenuto della pagina */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Stile per il titolo */
+.container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Stile per la lista delle card */
+.debt-list {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+/* Stile per le singole card */
+.debt-card {
+  width: 100%;
+}
+
+/* Allinea il pulsante nella parte inferiore della card */
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Stile per lo span che mostra il numero di debiti */
+.debt-count-badge {
+  display: inline-block;
+  background-color: #607eaa54; /* Colore di sfondo simile a un pulsante */
+  color: white; /* Colore del testo */
+  padding: 10px 20px; /* Spaziatura interna */
+  border-radius: 20px; /* Bordi arrotondati */
+  font-size: 16px; /* Dimensione del testo */
+  /* font-weight: bold; */
+  text-align: center; /* Centra il testo */
+  margin-top: 20px;
+  cursor: default; /* Cambia il cursore */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Aggiunge ombra */
+  transition: background-color 0.3s ease;
+}
+
+/* Effetto hover */
+.debt-count-badge:hover {
+  background-color: #1565c0; /* Cambia il colore di sfondo al passaggio del mouse */
+}

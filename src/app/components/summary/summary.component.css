@@ -24,3 +24,10 @@ table {
   background-color: #db1e1e !important;
   font-weight: bold;
 }
+
+.custom-month-label {
+  font-size: 14px; /* Riduci la dimensione del testo */
+  font-weight: normal; /* Modifica il peso del font se necessario */
+  color: #333; /* Modifica il colore se necessario */
+}
+

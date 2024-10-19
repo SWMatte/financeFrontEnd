@@ -5,8 +5,8 @@ import { GraphsService } from 'src/app/service/graphs.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SummaryDTO } from 'src/app/classes/SummaryDTO';
-import { DataServiceBehaviorSubj } from 'src/app/service/dataServiceBehaviorSubj';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { DataServiceBehaviorSubj } from 'src/app/service/dataServiceBehaviorSubj';
 
 @Component({
   selector: 'app-summary',
@@ -64,6 +64,7 @@ export class SummaryComponent implements OnInit, OnChanges{
             SummaryDTO.graphArray=[]
             this.summary.forEach(value => SummaryDTO.toGraph(value.tipoEvento?.toString(), value.valoreInserito))
             this.dataServiceBehaviorSubj.setGraphArray(SummaryDTO.graphArray)
+             
           }
         }
         this.findError = false;

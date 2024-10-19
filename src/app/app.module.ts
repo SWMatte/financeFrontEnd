@@ -37,7 +37,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ABarComponent } from './components/a-bar/a-bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraphComponentComponent } from './components/graph-component/graph-component.component';
-   
+import { ViewDebitsComponent } from './components/view-debits/view-debits.component';
+import {MatCardModule} from '@angular/material/card';
+import { MatDialogModule} from '@angular/material/dialog';
+import { DebitsInfoComponent } from './components/debits-info/debits-info.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +56,9 @@ import { GraphComponentComponent } from './components/graph-component/graph-comp
     FinanceComponent,
     SummaryComponent,
     ABarComponent,
-    GraphComponentComponent
+    GraphComponentComponent,
+    ViewDebitsComponent,
+    DebitsInfoComponent
 
   ],
   imports: [
@@ -75,7 +82,9 @@ import { GraphComponentComponent } from './components/graph-component/graph-comp
     MatTableModule,
     MatPaginatorModule,
     NgxChartsModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [
     { provide: NativeDateAdapter, useClass: NativeDateAdapter },
