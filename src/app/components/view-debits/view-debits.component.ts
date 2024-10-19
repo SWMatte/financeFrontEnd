@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { DebitPaymentDTO } from 'src/app/classes/DebitPaymentDTO';
 import { DebitService } from 'src/app/service/debit.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { DebitsInfoComponent } from '../debits-info/debits-info.component';
+
 @Component({
   selector: 'app-view-debits',
   templateUrl: './view-debits.component.html',
@@ -9,19 +13,21 @@ import { DebitService } from 'src/app/service/debit.service';
 })
 export class ViewDebitsComponent implements OnInit {
 
-
+  readonly dialog = inject(MatDialog);
 
   constructor(private debitService: DebitService) { }
   completeDebts: DebitPaymentDTO[] = [];  // Variabile per memorizzare i dati
+  numbersOfDebts: string = ""
 
- 
+  numbersOfDebts_: number = 0;
+  numbersOfCompleteDebts:string ="";
 
+  numbersOfCompleteDebts_: number = 0;
 
-
+  
   ngOnInit(): void {
     this.getCompletedDebts(); // tutti i debiti presenti a backend saldati e non
 
- 
   }
 
 
@@ -38,16 +44,53 @@ export class ViewDebitsComponent implements OnInit {
       }
 
     } catch (error) {
-      console.log(error)
-
+      // console.log(error + "a")
     }
+    this.getNumbersOfTotalDebts();
+    this.getNumbersOfFinishDebts();
   }
 
-  async  moreInfo(debitID: number) {
-  
+  async moreInfo(debitID: number) {
 
-     const response = await firstValueFrom(this.debitService.getMoreinfoDebts(debitID));
-     console.log(response.body)
+    const dialogRef = this.dialog.open(DebitsInfoComponent, {
+      data: { debitID: debitID }
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
+
+
+  async getNumbersOfTotalDebts() {
+    try {
+      const response = await firstValueFrom(this.debitService.getNumbersOfTotalDebts());
+      if (response == null || response == undefined) {
+        this.numbersOfDebts ="Errore nel conteggio dei debiti";
+      }else{
+        this.numbersOfDebts_ = response;
+        this.numbersOfDebts= "Numero di debiti : " +this.numbersOfDebts_
+      }
+
+    } catch (error) {}
+  }
+
+
+  async getNumbersOfFinishDebts() {
+    try {
+      const response = await firstValueFrom(this.debitService.getNumbersOfFinishDebts());
+      if (response == null || response == undefined) {
+        this.numbersOfCompleteDebts ="Errore nel conteggio dei debiti";
+      }else{
+        this.numbersOfCompleteDebts_ = response;
+        this.numbersOfCompleteDebts= "Numero di debiti saldati: " +this.numbersOfCompleteDebts_
+      }
+
+      console.log(this.numbersOfCompleteDebts)
+
+    } catch (error) {}
+  }
+
 
 }

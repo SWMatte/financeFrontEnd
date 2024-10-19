@@ -1,0 +1,21 @@
+
+<mat-dialog-content class="mat-typography">
+   <p *ngIf="completeDebts && completeDebts.descrizione">
+    Descrizione: {{ completeDebts.descrizione }}
+  </p>
+  <p *ngIf="completeDebts && completeDebts.dataInserimento">
+    Data Inserimento: {{ completeDebts.dataInserimento }}
+  </p>
+  <p *ngIf="completeDebts && completeDebts.valoreDebito">
+    valore del debito: {{ completeDebts.valoreDebito|currency:'EUR' }}
+  </p>
+  <p *ngIf="completeDebts && completeDebts.saldoResiduo">
+    Saldo residuo: {{ completeDebts.saldoResiduo |currency:'EUR'}}
+  </p>
+  <p *ngIf="completeDebts && completeDebts.euroDedicati">
+    Euro dedicati: {{ completeDebts.euroDedicati |currency:'EUR'}}
+  </p>
+ 
+
+   <p *ngIf="!completeDebts">Caricamento in corso o dati non disponibili.</p>
+</mat-dialog-content>

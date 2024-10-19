@@ -1,19 +1,22 @@
-<p>view-debits works!</p>
+<app-navigation-menu></app-navigation-menu>
 
+<div class="container">
+  <h2>Lista dei debiti</h2>
+  
+  <div class="debt-list" *ngFor="let debt of completeDebts">
+    <mat-card class="debt-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>{{debt.description}}</mat-card-title>
+        <mat-card-subtitle>Debito saldato: {{debt.settled ? 'Si' : 'No'}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-button (click)="moreInfo(debt.debitID!)"> Maggiori info <mat-icon>expand_more</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
-<!-- 
-<mat-card appearance="outlined">
-    <mat-card-content>ID:{{debt.debitID}} | Data: {{debt.data}} | Descrizione:  {{debt.description}} | Valore debito :{{debt.valueFinish}} | Valore iniziale: {{debt.valueStart}} | Saldato: {{debt.settled}}</mat-card-content>
-  </mat-card> -->
+  <span class="debt-count-badge"> {{numbersOfDebts}} </span>
+  <span class="debt-count-badge"> {{numbersOfCompleteDebts}} </span>
 
-<div *ngFor="let debt of completeDebts" > 
-<mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title> {{debt.description}}</mat-card-title>
-      <mat-card-subtitle>Debito saldato:{{debt.settled?'Si':'No'}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-      <button mat-button (click)="moreInfo(debt.debitID!)"> Maggiori info <mat-icon>expand_more</mat-icon></button>
-    </mat-card-actions>
-  </mat-card>
+  
 </div>

@@ -45,6 +45,14 @@ export class DebitService {
       const params = new HttpParams().set('debitoID', debitoID.toString());
       return this.http.get<DebitoDTO>(this.url + 'getMoreinfoDebts', { params, observe: 'response' });
   }
-  
+
+
+  public getNumbersOfTotalDebts(): Observable<any> {
+    return this.http.get<any>(this.url + 'getNumbersOfTotalDebts');
+}
+public getNumbersOfFinishDebts(): Observable<any> {
+  return this.http.get<any>(this.url + 'getNumbersOfFinishDebts');
+}
+
 
 }
