@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
@@ -41,6 +41,8 @@ import { ViewDebitsComponent } from './components/view-debits/view-debits.compon
 import {MatCardModule} from '@angular/material/card';
 import { MatDialogModule} from '@angular/material/dialog';
 import { DebitsInfoComponent } from './components/debits-info/debits-info.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { AuthenticatorService } from './service/authenticator.service';
 
 
 @NgModule({
@@ -84,10 +86,11 @@ import { DebitsInfoComponent } from './components/debits-info/debits-info.compon
     NgxChartsModule,
     FormsModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [
-    { provide: NativeDateAdapter, useClass: NativeDateAdapter },
+    { provide: NativeDateAdapter, useClass: NativeDateAdapter }, {provide: HTTP_INTERCEPTORS , useClass: AuthenticatorService, multi: true }
   ],
   bootstrap: [AppComponent],
 })
