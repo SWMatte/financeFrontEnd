@@ -34,7 +34,6 @@ import { FinanceComponent } from './components/finance/finance.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ABarComponent } from './components/a-bar/a-bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraphComponentComponent } from './components/graph-component/graph-component.component';
 import { ViewDebitsComponent } from './components/view-debits/view-debits.component';
@@ -43,6 +42,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { DebitsInfoComponent } from './components/debits-info/debits-info.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthenticatorService } from './service/authenticator.service';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -57,10 +57,10 @@ import { AuthenticatorService } from './service/authenticator.service';
     DebitComponent,
     FinanceComponent,
     SummaryComponent,
-    ABarComponent,
     GraphComponentComponent,
     ViewDebitsComponent,
-    DebitsInfoComponent
+    DebitsInfoComponent,
+    RegisterComponent
 
   ],
   imports: [

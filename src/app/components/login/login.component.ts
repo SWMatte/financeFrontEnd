@@ -18,20 +18,16 @@ export class LoginComponent {
 
   constructor(private router: Router, private  authenticatorService: AuthenticatorService) {}
 
-  salvaDati(nome: string, cognome: string) {
+  salvaDati(username: string, password: string) {
     this.isLoading = true;
 
-    this.authenticatorService.login(new LoginDTO(nome, cognome)).subscribe(response => {
+    this.authenticatorService.login(new LoginDTO(username, password)).subscribe(response => {
       this.messageLogin = response.body?.message
       this.tokenLogin = response.body?.token;
-      
       if (this.tokenLogin) {  
         localStorage.setItem("token", this.tokenLogin);  
       } 
     });
-    
-
-
     setTimeout(() => {
       this.isLoading = false;  
       this.router.navigate(['/home']);
@@ -39,5 +35,6 @@ export class LoginComponent {
   }
 
   
- 
+  // P FAI IL COMPONENTE DI REGISTRAZIONE, TI RIMANDA AL MASSIMO AL LOGIN COME REDIRECT
+    // DOPODICHE FAI LA LOGIN VEDI COME RESTITUISCE IL TOKEN SE RIUSCIAMO AD AGGANCIARLO POI LEGGI WORD
 }

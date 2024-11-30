@@ -62,8 +62,8 @@ export class SummaryComponent implements OnInit, OnChanges{
          * Richiamiamo il behavior subject DataServiceBehaviorSubj  per assegnargli l'array
          */
         if (this.summary.length > 0) {
-          if (SummaryDTO.graphArray.length == 0) {  
-            this.summary.forEach(value => SummaryDTO.toGraph(value.tipoEvento?.toString(), value.valoreInserito))  
+          if (SummaryDTO.graphArray.length == 0) { 
+              this.summary.forEach(value => SummaryDTO.toGraph(value.tipoEvento?.toString(), value.valoreInserito))  
             this.dataServiceBehaviorSubj.setGraphArray(SummaryDTO.graphArray)
           } else { 
             SummaryDTO.graphArray=[]

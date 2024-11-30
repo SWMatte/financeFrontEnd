@@ -1,0 +1,41 @@
+ <app-navigation-menu></app-navigation-menu>
+
+<ng-container>
+   
+  <div class="form-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <p class="description-text">
+        Inserisci i dettagli dell'utente:
+      </p>
+      <mat-form-field appearance="fill">
+        <mat-label>email</mat-label>
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>password</mat-label>
+        <input matInput type="text" formControlName="password" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Seleziona ruolo</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="" disabled selected>Seleziona ruolo</mat-option>
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+      class="full-width"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!registerForm.valid">
+      Conferma
+    </button>
+    
+    </form>
+  </div>
+</ng-container>
