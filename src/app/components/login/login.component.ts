@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {  Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 //import { LoginService } from 'src/app/service/login.service';
 import { AuthenticatorService } from '../../service/authenticator.service';
 import { LoginDTO } from 'src/app/classes/LoginDTO';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,26 +16,37 @@ export class LoginComponent {
   tokenLogin: string|undefined =""
 
   isLoading: boolean = false;
+  snackBar = inject(MatSnackBar);
 
   constructor(private router: Router, private  authenticatorService: AuthenticatorService) {}
 
-  salvaDati(username: string, password: string) {
+  async salvaDati(username: string, password: string) {
     this.isLoading = true;
-
-    this.authenticatorService.login(new LoginDTO(username, password)).subscribe(response => {
+    try {
+      const response = await firstValueFrom (this.authenticatorService.login(new LoginDTO(username, password)) )
+      console.log(response)
       this.messageLogin = response.body?.message
       this.tokenLogin = response.body?.token;
+    
+    } catch (error:any) {
+      console.log(error)
+       this.openSnackBar(error.error);
+    }
+
       if (this.tokenLogin) {  
         localStorage.setItem("token", this.tokenLogin);  
       } 
-    });
     setTimeout(() => {
       this.isLoading = false;  
       this.router.navigate(['/home']);
     }, 3000);
   }
 
-  
-  // P FAI IL COMPONENTE DI REGISTRAZIONE, TI RIMANDA AL MASSIMO AL LOGIN COME REDIRECT
-    // DOPODICHE FAI LA LOGIN VEDI COME RESTITUISCE IL TOKEN SE RIUSCIAMO AD AGGANCIARLO POI LEGGI WORD
-}
+  openSnackBar(message: string) { // open the message after send the event
+    this.snackBar.open(message);
+    setTimeout(() => {
+      this.snackBar.dismiss();
+      this.router.navigate(['/home']);
+    }, 3000);
+  }
+ }

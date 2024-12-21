@@ -30,11 +30,13 @@ export class AuthenticatorService implements HttpInterceptor {
 
   
   public login(body:LoginDTO ): Observable<HttpResponse<LoginResponseDTO>> {
-    return this.http.post<LoginResponseDTO>(`${this.url}login`, body, { observe: 'response' });  
+     return this.http.post<LoginResponseDTO>(`${this.url}login`, body, { observe: 'response' });  
     }
 
     
     public register(body:LoginDTO ): Observable<HttpResponse<any>> {
+
+ 
       return this.http.post<any>(`${this.url}register`, body, { observe: 'response' });  
       }
   

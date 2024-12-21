@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -21,14 +21,14 @@ export class RegisterComponent {
   registerForm!: FormGroup
   snackBar = inject(MatSnackBar);
   roles = Object.values(Role); // Trasforma l'enum Role in un array di valori
-
+  check: boolean = false;
 
   ngOnInit(): void {
 
     this.registerForm = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl(),
-      role: new FormControl()
+      email: new FormControl('',[Validators.required,Validators.email]),
+      password: new FormControl('',Validators.required),
+      role: new FormControl('',Validators.required)
     });
 
   }
@@ -43,8 +43,8 @@ export class RegisterComponent {
       this.setFormDisabled(true); // Disabilita il form durante l'operazione
       try {
         const response = await firstValueFrom(this.authenticatorService.register(this.buildResponse(this.registerForm)));
-
         if (response.status === 200) {
+          this.check = true;
           this.openSnackBar("Utente registrato correttamente, sarai reindirizzato al login");
         } else {
           if (response.status === 400) {
@@ -55,10 +55,11 @@ export class RegisterComponent {
             this.openSnackBar("Errore sconosciuto, riprovare!");
           }
         }
-      } catch (error) {
+      } catch (error: any) {
+        this.setFormDisabled(false);
+        this.openSnackBar(error.error);
 
-        console.error("Errore durante il salvataggio del debito:", error);
-        this.openSnackBar("Errore imprevisto, riprovare!");
+
       }
     }
   }
@@ -75,10 +76,12 @@ export class RegisterComponent {
 
   openSnackBar(message: string) { // open the message after send the event
     this.snackBar.open(message);
-    setTimeout(() => {
-      this.snackBar.dismiss();
-      this.router.navigate(['/login']);
-    }, 2500);
+    if (this.check==true) {
+      setTimeout(() => {
+        this.snackBar.dismiss();
+        this.router.navigate(['/login']);
+      }, 2500);
+    }
   }
 
 }
