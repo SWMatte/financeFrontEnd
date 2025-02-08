@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
@@ -34,13 +34,17 @@ import { FinanceComponent } from './components/finance/finance.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ABarComponent } from './components/a-bar/a-bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraphComponentComponent } from './components/graph-component/graph-component.component';
 import { ViewDebitsComponent } from './components/view-debits/view-debits.component';
 import {MatCardModule} from '@angular/material/card';
 import { MatDialogModule} from '@angular/material/dialog';
 import { DebitsInfoComponent } from './components/debits-info/debits-info.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { AuthenticatorService } from './service/authenticator.service';
+import { RegisterComponent } from './components/register/register.component';
+import { SpreadOutPaymentsComponent } from './components/spread-out-payments/spread-out-payments.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -55,10 +59,12 @@ import { DebitsInfoComponent } from './components/debits-info/debits-info.compon
     DebitComponent,
     FinanceComponent,
     SummaryComponent,
-    ABarComponent,
     GraphComponentComponent,
     ViewDebitsComponent,
-    DebitsInfoComponent
+    DebitsInfoComponent,
+    RegisterComponent,
+    SpreadOutPaymentsComponent,
+    ProfileComponent
 
   ],
   imports: [
@@ -84,10 +90,11 @@ import { DebitsInfoComponent } from './components/debits-info/debits-info.compon
     NgxChartsModule,
     FormsModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [
-    { provide: NativeDateAdapter, useClass: NativeDateAdapter },
+    { provide: NativeDateAdapter, useClass: NativeDateAdapter }, {provide: HTTP_INTERCEPTORS , useClass: AuthenticatorService, multi: true }
   ],
   bootstrap: [AppComponent],
 })

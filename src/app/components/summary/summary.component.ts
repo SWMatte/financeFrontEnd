@@ -14,6 +14,7 @@ import { DataServiceBehaviorSubj } from 'src/app/service/dataServiceBehaviorSubj
   styleUrls: ['./summary.component.css']
 })
 export class SummaryComponent implements OnInit, OnChanges{
+
   summary: Summary[] = [];
   findError: boolean = false;
   stringError: string = "";
@@ -23,6 +24,9 @@ export class SummaryComponent implements OnInit, OnChanges{
   month:string="";   
   graph!: SummaryDTO;
   dataGraph: SummaryDTO[] = [];
+  filterPanelOpen: string =""; // Stato per mostrare/nascondere il pannello dei filtri
+  counterFiltered : number = 0;
+  filteredData: Summary[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator; //viewchild mi permette di mostrare paginator ovvero i numeri di pagina solo dopo che è stata istanziata la vista  in quanto è assegnata alla variabile paginator
 
@@ -36,6 +40,7 @@ export class SummaryComponent implements OnInit, OnChanges{
   ngOnInit(): void {
     this.summaryResult();
     this.graph = new SummaryDTO();
+    this.filteredData = [...this.summary]; 
   }
 
   async summaryResult() {
@@ -57,8 +62,8 @@ export class SummaryComponent implements OnInit, OnChanges{
          * Richiamiamo il behavior subject DataServiceBehaviorSubj  per assegnargli l'array
          */
         if (this.summary.length > 0) {
-          if (SummaryDTO.graphArray.length == 0) {  
-            this.summary.forEach(value => SummaryDTO.toGraph(value.tipoEvento?.toString(), value.valoreInserito))  
+          if (SummaryDTO.graphArray.length == 0) { 
+              this.summary.forEach(value => SummaryDTO.toGraph(value.tipoEvento?.toString(), value.valoreInserito))  
             this.dataServiceBehaviorSubj.setGraphArray(SummaryDTO.graphArray)
           } else { 
             SummaryDTO.graphArray=[]
@@ -137,4 +142,39 @@ async  resetDate(){
   await this.summaryResult();
 }
 
+/**
+ * 
+ * @param column  in base alla colonna che viene cliccata, si fa un check sulla variaibile filterPanelOpen se è uguale al nome della colonna si chiude altrimenti si apre puoi fare un check mettendo console log
+ * 
+ */
+toggleFilterPanel(column: string) {
+  
+  if (this.filterPanelOpen === column) {
+    // Se la colonna è già aperta, chiudi il filtro
+    this.filterPanelOpen = "";
+    this.resetDataSource();
+  } else {
+    // Altrimenti, apri il filtro per la colonna cliccata
+    this.filterPanelOpen = column;
+  }
 }
+
+ 
+applyFilter(selectedTipo: string) {
+  if(this.filterPanelOpen == ""){
+    this.dataSource.data = this.summary
+  } else{
+    this.filteredData = this.summary.filter(item => item.tipoEvento === selectedTipo);
+    this.dataSource.data = this.filteredData
+
+  }
+ }
+
+ resetDataSource() {
+  this.dataSource.data = this.summary;
+ }
+
+
+ 
+}
+   

@@ -1,18 +1,28 @@
+<a mat-button routerLink="/register">
+  <span>Registra utente</span>
+  <mat-icon>info</mat-icon>
+</a>
+
+<a mat-button routerLink="/profile">
+  <span>Profilo </span>
+  <mat-icon>supervised_user_circle</mat-icon>
+ </a>
+
 <div class="container">
   <mat-form-field appearance="fill">
-    <mat-label>Inserisci nome</mat-label>
-    <input matInput placeholder="Placeholder" #inputNome>
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-label>Inserisci username</mat-label>
+    <input matInput   #username>
+    <mat-icon>supervisor_account</mat-icon>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Inserisci cognome</mat-label>
-    <input matInput placeholder="Placeholder" #inputCognome>
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-label>Inserisci password</mat-label>
+    <input matInput #password type="password" />
+    <mat-icon> dialpad</mat-icon>
   </mat-form-field>
 
   <div class="button-container">
-    <button mat-raised-button (click)="salvaDati(inputNome.value, inputCognome.value)">Salva</button>
+    <button mat-raised-button (click)="salvaDati(username.value, password.value)">Salva</button>
   </div>
 
    <mat-spinner *ngIf="isLoading" diameter="50"></mat-spinner>

@@ -27,7 +27,7 @@
       </mat-form-field>
 
       <!-- Condizionale per risparmio -->
-      <mat-form-field appearance="fill" class="full-width" *ngIf="eventForm.get('typeEvent')?.value != 'SPESA'">
+      <mat-form-field appearance="fill" class="full-width" *ngIf="eventForm.get('typeEvent')?.value != 'SPESA' && eventForm.get('typeEvent')?.value !='DEBITO' "  >
         <mat-label>Vuoi risparmiare qualcosa su questo evento?</mat-label>
         <mat-select formControlName="savedMoney">
           <mat-option value="true">Si</mat-option>
@@ -47,22 +47,8 @@
           <mat-option *ngFor="let perc of percentage" [value]="perc">{{ perc | percentage }}</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <!-- Debito -->
-      <mat-form-field
-        appearance="fill"
-        class="full-width"
-        *ngIf="eventForm.get('typeEvent')?.value == 'ENTRATA' && eventForm.get('savedMoney')?.value == 'false'"
-      >
-        <mat-label>Vuoi mettere l'evento per il debito?</mat-label>
-        <mat-select formControlName="objective">
-          <mat-option value="true">Si</mat-option>
-          <mat-option value="false">No</mat-option>
-        </mat-select>
-      </mat-form-field>
-
       <!-- Seleziona debito -->
-      <mat-form-field appearance="fill" class="full-width" *ngIf="eventForm.get('objective')?.value == 'true'">
+      <mat-form-field appearance="fill" class="full-width" *ngIf="eventForm.get('typeEvent')?.value == 'DEBITO'">
         <mat-label>Seleziona debito da rateizzare</mat-label>
         <mat-select formControlName="selectedDebt">
           <mat-option value="" disabled selected>Seleziona debito</mat-option>
@@ -71,11 +57,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-  
-      
         <button type="submit" mat-raised-button color="primary" [disabled]="!eventForm.valid"  class="full-width">Conferma</button>
-       
-      
     </form>
   </div>
 </ng-container>

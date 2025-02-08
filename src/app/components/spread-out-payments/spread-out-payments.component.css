@@ -1,0 +1,37 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Riduci il padding per non avere troppo spazio intorno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: #ffffff;
+    max-width: 500px; /* Riduce la larghezza massima del form */
+    margin: 10vh auto; /* Aggiusta il margine per centrarlo verticalmente */
+  }
+  
+  .form-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  
+  /* Stile per la descrizione sopra il primo input */
+  .description-text {
+    font-size: 16px;
+    font-weight: 500;
+     margin-bottom: 16px;
+    text-align: left;
+     padding: 10px;
+    border-radius: 5px;
+  }

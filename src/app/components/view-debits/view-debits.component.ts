@@ -5,6 +5,7 @@ import { DebitService } from 'src/app/service/debit.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DebitsInfoComponent } from '../debits-info/debits-info.component';
+import { SpreadOutPaymentsComponent } from '../spread-out-payments/spread-out-payments.component';
 
 @Component({
   selector: 'app-view-debits',
@@ -12,6 +13,7 @@ import { DebitsInfoComponent } from '../debits-info/debits-info.component';
   styleUrls: ['./view-debits.component.css']
 })
 export class ViewDebitsComponent implements OnInit {
+
 
   readonly dialog = inject(MatDialog);
 
@@ -92,5 +94,9 @@ export class ViewDebitsComponent implements OnInit {
     } catch (error) {}
   }
 
-
+  spreadPayments() {
+   
+      const dialogRef = this.dialog.open(SpreadOutPaymentsComponent, {});
+    
+  }
 }

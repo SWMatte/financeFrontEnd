@@ -1,6 +1,7 @@
 export enum Type {
      
     spesa = 'SPESA',
-    entrata ='ENTRATA'
+    entrata ='ENTRATA',
+    debito='DEBITO'
      
 }
