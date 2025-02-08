@@ -1,0 +1,31 @@
+<app-navigation-menu></app-navigation-menu>
+
+<ng-container>
+   
+  <div class="form-container">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <p class="description-text">
+        Inserisci i dati richiesti per cambiare password:
+      </p>
+      <mat-form-field appearance="fill">
+        <mat-label>Username:</mat-label>
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nuova password</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+
+      <button
+      class="full-width"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!profileForm.valid">
+      Conferma
+    </button>
+    
+    </form>
+  </div>
+</ng-container>

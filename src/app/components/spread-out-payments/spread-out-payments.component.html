@@ -1,0 +1,35 @@
+ 
+
+<ng-container>
+  <div class="form-container">
+    <form [formGroup]="eventForm">
+      <p class="description-text">Inserisci i dettagli del debito: </p>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Seleziona il debito:</mat-label>
+          <mat-select formControlName="debtSelected">
+            <mat-option *ngFor="let deb of debts" [value]="deb">
+              {{ deb.description }}({{ deb.valueFinish | currency : "EUR" }})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Seleziona in quanti mesi lo vuoi rateizzare</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="numberMonths"
+            min="0"
+            step="1"
+            placeholder="Inserisci un numero"
+          />
+        </mat-form-field>
+       
+        <span *ngIf="totalToSave > 0"
+          >Per rateizzare {{ inizialPrice | currency : "EUR" }} in:
+          {{ numberMonth }} mesi devi risparmiare mensilmente:
+          {{ totalToSave | currency : "EUR" }}</span
+        > 
+    </form>
+  </div>
+</ng-container>

@@ -37,7 +37,7 @@ mat-card-actions {
 /* Stile per lo span che mostra il numero di debiti */
 .debt-count-badge {
   display: inline-block;
-  background-color: #607eaa54; /* Colore di sfondo simile a un pulsante */
+  background-color: #1565c0; /* Colore di sfondo simile a un pulsante */
   color: white; /* Colore del testo */
   padding: 10px 20px; /* Spaziatura interna */
   border-radius: 20px; /* Bordi arrotondati */
@@ -50,7 +50,11 @@ mat-card-actions {
   transition: background-color 0.3s ease;
 }
 
-/* Effetto hover */
+/* Effetto hover 
 .debt-count-badge:hover {
-  background-color: #1565c0; /* Cambia il colore di sfondo al passaggio del mouse */
+  background-color: #1565c0;  Cambia il colore di sfondo al passaggio del mouse  
+}
+*/
+.debt-count-badge.cursore {
+  cursor:pointer; /* Cambia il cursore */
 }

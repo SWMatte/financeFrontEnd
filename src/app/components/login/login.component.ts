@@ -24,7 +24,6 @@ export class LoginComponent {
     this.isLoading = true;
     try {
       const response = await firstValueFrom (this.authenticatorService.login(new LoginDTO(username, password)) )
-      console.log(response)
       this.messageLogin = response.body?.message
       this.tokenLogin = response.body?.token;
     

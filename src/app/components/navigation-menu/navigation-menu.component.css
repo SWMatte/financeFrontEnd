@@ -1,0 +1,19 @@
+.nav-bar {
+    display: flex;
+    justify-content: space-between; /* Spaziatura tra sinistra e destra */
+    align-items: center; /* Allinea verticalmente */
+    padding: 10px 20px; /* Aggiungi padding al contenitore */
+    background-color: #f5f5f5; /* Colore di sfondo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombreggiatura */
+  }
+  
+  .nav-left {
+    display: flex;
+    gap: 16px; /* Distanza tra i link */
+  }
+  
+  .nav-right {
+    display: flex;
+    align-items: center;
+  }
+  

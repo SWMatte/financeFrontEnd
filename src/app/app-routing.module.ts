@@ -7,6 +7,7 @@ import { DebitComponent } from './components/debit/debit.component';
 import { ViewDebitsComponent } from './components/view-debits/view-debits.component';
 import { RegisterComponent } from './components/register/register.component';
 import { canActivate } from './rolesguard.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
  { path: 'form', component: FormComponent ,canActivate: [canActivate] },
  { path: 'debit', component: DebitComponent ,canActivate: [canActivate] },
  { path: 'viewDebit', component: ViewDebitsComponent ,canActivate: [canActivate] },
+ { path: 'profile', component: ProfileComponent  },
  { path: 'register', component: RegisterComponent }
 ];
 

@@ -43,6 +43,8 @@ import { DebitsInfoComponent } from './components/debits-info/debits-info.compon
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthenticatorService } from './service/authenticator.service';
 import { RegisterComponent } from './components/register/register.component';
+import { SpreadOutPaymentsComponent } from './components/spread-out-payments/spread-out-payments.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { RegisterComponent } from './components/register/register.component';
     GraphComponentComponent,
     ViewDebitsComponent,
     DebitsInfoComponent,
-    RegisterComponent
+    RegisterComponent,
+    SpreadOutPaymentsComponent,
+    ProfileComponent
 
   ],
   imports: [
